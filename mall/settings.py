@@ -191,4 +191,6 @@ LOGGING = {
     }
 }
 
+
+# 使用 django 自带的用户验证需要添加
 AUTH_USER_MODEL = "users.User"
