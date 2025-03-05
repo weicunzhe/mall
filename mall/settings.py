@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'mall.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '127.0.0.1',  # 主机
+        'PORT': "3306",  # 端口号
+        'USER': "mall",  # 用户
+        'PASSWORD': "Qq198929.",  # 密码
+        'NAME': 'mall',  # 指定数据库
     }
 }
 
@@ -186,3 +190,5 @@ LOGGING = {
         },
     }
 }
+
+AUTH_USER_MODEL = "users.User"
