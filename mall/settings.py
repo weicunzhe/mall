@@ -192,5 +192,7 @@ LOGGING = {
 }
 
 
-# 使用 django 自带的用户验证需要添加
+###########################修改自定义用户模型#####################################
+# Django 允许你通过为 AUTH_USER_MODEL 配置提供一个引用自定义模型的值来覆盖默认的用户模型
+# 这个点对描述了 Django 应用程序的 label （必须在您的 INSTALLED_APPS 中），以及您希望用作用户模型的 Django 模型的名称。
 AUTH_USER_MODEL = "users.User"
