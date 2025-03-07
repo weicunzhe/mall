@@ -18,7 +18,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.http import HttpResponse
-from django.urls import path
+from django.urls import path,include
 
 
 
@@ -40,6 +40,8 @@ def log(request):
     return HttpResponse('log')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('log/',log),
+    path('admin/', admin.site.urls),\
+
+    # 导入 users子应用路由
+    path('',include('apps.users.urls')),
 ]
