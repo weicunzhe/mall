@@ -25,12 +25,19 @@ SECRET_KEY = 'django-insecure-o6lf)d_zx6wit5+3bt#t%k$rjm!)$^4(0vqe%($wlchx#cw&r*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '192.168.1.4',
+    'www.meiduo.site'
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+
+    # CORS
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,14 +46,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #'apps.users',
-    'apps.users.apps.UsersConfig'
+    'apps.users.apps.UsersConfig',
+
 ]
 
 MIDDLEWARE = [
+    # CORS 的配置放在最上面
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -196,3 +206,20 @@ LOGGING = {
 # Django 允许你通过为 AUTH_USER_MODEL 配置提供一个引用自定义模型的值来覆盖默认的用户模型
 # 这个点对描述了 Django 应用程序的 label （必须在您的 INSTALLED_APPS 中），以及您希望用作用户模型的 Django 模型的名称。
 AUTH_USER_MODEL = "users.User"
+
+
+###############################CORS############################################
+# CORS
+CORS_ORIGIN_WHITELIST = (
+    'http://127.0.0.1:8080',
+    'http://localhost:8080',
+    'http://192.168.1.4:8080',
+    'http://www.meiduo.site:8080',
+    'http://www.meiduo.site:8000',
+)
+
+
+# CORS_ORIGIN_ALLOW_ALL = True
+
+
+CORS_ALLOW_CREDENTIALS = True  # 允许携带cookie
