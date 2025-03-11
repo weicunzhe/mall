@@ -17,11 +17,7 @@ Including another URLconf
 
 
 from django.contrib import admin
-from django.http import HttpResponse
 from django.urls import path,include
-
-
-
 
 # def log(request):
 #
@@ -51,4 +47,6 @@ urlpatterns = [
 
     # 导入 users子应用路由
     path('',include('apps.users.urls')),
+
+    path('', include('apps.verifications.urls')),
 ]

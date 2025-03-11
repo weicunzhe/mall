@@ -46,8 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #'apps.users',
-    'apps.users.apps.UsersConfig',
-
+    'apps.users',
+    'apps.verifications',
 ]
 
 MIDDLEWARE = [
@@ -152,6 +152,10 @@ CACHES = {
     "session": {    # 用于保存session数据
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": "redis://127.0.0.1:6379/1",
+    },
+    "verify_codes": {  # 用于保存session数据
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/2",
     },
 }
 
