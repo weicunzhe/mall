@@ -55,11 +55,26 @@ class SmsCodeView(View):
 
         from random import randint
         sms_code = '%04d' % randint(0, 9999)
-        redis_conn.setex(mobile, 300, sms_code)
-        # 添加一个发送标记,有效期60秒
-        redis_conn.setex('send_flag_' % mobile, 60, 1)
-        from libs.sms import SmsSDK
 
+
+        # redis管道 优化性能
+        # 创建一个管道
+        pipline =  redis_conn.pipeline()
+        # 管道收集指令
+        pipline.setex(mobile, 300, sms_code)
+        # 添加一个发送标记,有效期60秒
+        pipline.setex('send_flag_' % mobile, 60, 1)
+        # 管道执行指令
+        pipline.execute()
+
+        #
+        # redis_conn.setex(mobile, 300, sms_code)
+        # # 添加一个发送标记,有效期60秒
+        # redis_conn.setex('send_flag_' % mobile, 60, 1)
+
+
+
+        from libs.sms import SmsSDK
         accId = '2c94811c946f6bfb0195846f61952b7b'
         accToken = '6ccc2e2111c0408e96cff3e484c2fb6d'
         appId = '2c94811c946f6bfb0195846f63402b82'
